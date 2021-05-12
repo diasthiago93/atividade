@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [peso, setPeso] = useState();
+  const [altura, setAltura] = useState();
+  const [total, setTotal] = useState();
+
+  const calculaIMC = (event) => {
+    event.preventDefault();
+    const data = +peso / (+altura * +altura)
+    setTotal(data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <form>
+        <input value={peso} onChange={(e) => setPeso(e.target.value)} placeholder="Peso" type="text" />
+        <input value={altura} onChange={(e) => setAltura(e.target.value)} placeholder="Altura" type="text" />
+        <button onClick={(event) => calculaIMC(event)}>Calcular</button>
+        <h1>{total}</h1>
+      </form>
+    </>
   );
 }
 
